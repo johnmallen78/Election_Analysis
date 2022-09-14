@@ -14,7 +14,7 @@ The first step was to create a way to open the csv file, read the contents and o
 Once we had set up to read in the file we created dictionaires to contain the different aspects of the data we needed to analyze. We will go over the data collected and break it down by section below.
 
 #### *Total number of votes - 369,711
-        We calculated the total number of votes cast in the election by initializing a counter and then using a for loop to cycle through the rows and add to the total vote count until the final result was returned.
+We calculated the total number of votes cast in the election by initializing a counter and then using a for loop to cycle through the rows and add to the total vote count until the final result was returned.
         
 ![Total_Votes](/Resources/Total_Votes.png)
 
