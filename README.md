@@ -13,76 +13,46 @@ The first step was to create a way to open the csv file, read the contents and o
 
 Once we had set up to read in the file we created dictionaires to contain the different aspects of the data we needed to analyze. We will go over the data collected and break it down by section below.
 
-#### *Total number of votes - 369,711
+- Total number of votes - 369,711  
 We calculated the total number of votes cast in the election by initializing a counter and then using a for loop to cycle through the rows and add to the total vote count until the final result was returned.
         
 ![Total_Votes](/Resources/Total_Votes.png)
 
-*Number and percentage of votes for each candidate
-*Which county had the largest number of votes
-*Number and percentage of votes for each county
-*Winning candidate with vote count and percentage of the total votes
 
-We created some VBA macros that allowed us to populate the Year, Total Volume and Return for DQ in 2017 and 2018. The results were surprising.
+- Number and percentage of votes for each county  
+The election board wanted us to provide the total number of votes in each county in the data and provide a percentage of votes based on the total for each. This was a process of a simple for loop to cycle through the data based on the county name, and tally votes for each county.
+
+![county_votes](Resources/county_votes.png)
+
+As you can see in the above picture from the terminal printout, each county is represented as are the percentage of the total votes in each and a tally of the total votes in each county. We used the below code to achive this:
+
+countyvote_percentage = float(countyvotes) / float(total_votes) * 100
+        county_results = (
+            f"{county_name}: {countyvote_percentage:.1f}% ({countyvotes:,})\n")
+
+- Which county had the largest number of votes  
+The board decided that they also wanted to see which county had the largest number of votes (highest voter turnout) so we needed to add a section to achive this. Since we already had the data for each county we just needed to add an if statement to determine which county had the highest number of votes. We achived this with the below code:
+
+![largest_county](Resources/largest_county.png)
+
+- Number and percentage of votes for each candidate  
+In order to present this data we created a similar for loop as we did to tally the per county votes to count the number of votes for each candidate, add the candidate to the list, and then cycle through the rows adding up the number of votes for that candidate.
+
+        if candidate_name not in candidate_options:
+        candidate_options.append(candidate_name)
+        candidate_votes[candidate_name] = 0
+        candidate_votes[candidate_name] += 1
+
+This allowed us to tally up the total votes for each candidate and then apply some simple math to output the percentage of votes based on the total votes for each candidate.
 
 
+- Winning candidate with vote count and percentage of the total votes  
+Lastly we needed to present the winning candidate and total vote count for that candidate as well as a percentage of the total of votes for the candidate. Since we already have the data for each candidate this was a similar process to achiveing the county with the largest number of votes. The below code demonstrates the process to analyse this data and print the outcome.
 
-
-As you can see from this image, DQ did not perform well at all. Steve decided at this point that he wanted to be able to quickly compare all 12 of the stocks to determine the best performing stocks to suggest for his parent's portfolio.
-
-In order to make the process more accessible we created a new macro assigned to a button that allowed Steve to input the year needed and returned the same data analysis for all stock tickers in the spreadsheet.
-
-        yearValue = InputBox("What year would you like to run the analysis on?")
-
-Then by assigning the tickers to an array we looped through all the tickers in the spreadsheet to determine the Total Volumes and Returns.
-
-        'Assign the tickers to elements of the array
-                tickers(0) = "AY"
-                tickers(1) = "CSIQ"
-                tickers(2) = "DQ"
-                tickers(3) = "ENPH"
-                tickers(4) = "FSLR"
-                tickers(5) = "HASI"
-                tickers(6) = "JKS"
-                tickers(7) = "RUN"
-                tickers(8) = "SEDG"
-                tickers(9) = "SPWR"
-                tickers(10) = "TERP"
-                tickers(11) = "VSLR"
-
-We encountered another challenge during this process. The runtime for the data analysis seemed to be rather slow. Steve requested a timer for us to determine the overall run time of each set of data.
-
-        Dim startTime As Single
-        Dim endTime  As Single
-
-            startTime = Timer
-            
-
-            endTime = Timer
-    
-        MsgBox "This code ran in " & (endTime - startTime) & " seconds for the year " & (yearValue)
-
-This code allowed us to display the runtime of the data analysis for each year at the end of the process.
-
-![Pre_Refactoring_2017](/Resources/Pre_Refactoring_2017.png)
-![Pre_Refactoring_2017](/Resources/Pre_Refactoring_2018.png)
-
-As we can see from the above pictures the code did not take that long to run however the concern was as the data grew with more stocks added it could become quite cumbersome to research. We decided to refactor the code and use more arrays to expedite the analysis process. After refactoring the code by creating arrays for the outputs of tickerVolumes, tickerStartingPrices, and tickerEndingPrices as well as several other improvements to the code our runtimes were improved significantly.
-
-![VBA_Challenge_2017](/Resources/VBA_Challenge_2017.png)
-![VBA_Challenge_2018](/Resources/VBA_Challenge_2018.png)
-
-### Analysis of Outcomes 
-In the outcome tables below, we determined that the two stocks with the highest returns for 2017 and 2018 were ENPH and RUN.
-
-![Stock_Data_2017](/Resources/Stock_Data_2017.png)
-![Stock_Data_2018](/Resources/Stock_Data_2018.png)
-
-You can see from the data that while DQ had a positive return in 2017 they fell off significantly in 2018.
+![winning_candidate](Resources/winning_candidate.png)
 
 ### Summary
 
-As shown in the previous examples of the pre refactored code vs refactored, there is a significant increase in the runtime of the process after refactoring. While the refactoring of code did require more research to determine the best practices, the potential outcome of increased productivity during research proved to be enough to justify the code enhancement.
+![Terminal_Printout](Resources/Terminal_Printout.png)
 
-The original VBA script vs the refactored code was also much bulkier than the final product of the refactored code.
-
+The above image shows the final result of the data analysis. This script is highly adaptable to any election analysis scenario. Here are a couple of examples that would 
