@@ -1,7 +1,13 @@
 # Election_Analysis
 
 ## Overview of Project
-In this project we are working with the Colorado board of elections to do an election audit of the tabulated results for a U.S. congressional precinct in Colorado. We are working with Tom one of the employees and we have been tasked with reporting the total number of votes cast, the total number of votes for each candidate and the percentage of votes for each candidate. Lastly Tom would like us to show the winner of the election based on the popular vote.
+In this project we are working with the Colorado board of elections to do an election audit of the tabulated results for a U.S. congressional precinct in Colorado. We are working with Tom, one of the employees and we have been tasked with reporting the following data:
+- Total number of votes cast
+- Total number of votes for each county
+- County with the highest voter turnout
+- Total number of votes for each candidate
+- Percentage of votes for each candidate
+- Winner of the election based on the popular vote
 
 ### Purpose
 The main purpose in this analysis is to determine if there is a way to automate this process using Python rather than manually doing it in Excel. We will explore some steps to do this below.
@@ -15,7 +21,7 @@ Once we had set up to read in the file we created dictionaries to contain the di
 
 - Total number of votes - 369,711  
 We calculated the total number of votes cast in the election by initializing a counter and then using a for loop to cycle through the rows and add to the total vote count until the final result was returned.
-        
+     
 ![Total_Votes](/Resources/Total_Votes.png)
 
 - Number and percentage of votes for each county  
